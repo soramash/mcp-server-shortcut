@@ -25,6 +25,13 @@
 	"files": [
 		"dist"
 	],
+	"devDependencies": {
+		"@biomejs/biome": "2.0.5",
+		"@types/bun": "latest",
+		"bun": "^1.2.5",
+		"husky": "^9.1.7",
+		"shx": "^0.3.4"
+	},
 	"scripts": {
 		"test": "bun test",
 		"format": "biome check --write ./",
@@ -39,13 +46,6 @@
 		"@modelcontextprotocol/sdk": "^1.11.3",
 		"@shortcut/client": "^1.1.0",
 		"zod": "^3.24.4"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
-		"@types/bun": "latest",
-		"bun": "^1.2.5",
-		"husky": "^9.1.7",
-		"shx": "^0.3.4"
 	},
 	"peerDependencies": {
 		"typescript": "^5"
