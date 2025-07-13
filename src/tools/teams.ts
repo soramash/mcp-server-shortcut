@@ -8,13 +8,13 @@ export class TeamTools extends BaseTools {
 		const tools = new TeamTools(client);
 
 		server.tool(
-			"get-team",
+			"get_team",
 			"Get a Shortcut team by public ID",
 			{ teamPublicId: z.string().describe("The public ID of the team to get") },
 			async ({ teamPublicId }) => await tools.getTeam(teamPublicId),
 		);
 
-		server.tool("list-teams", "List all Shortcut teams", async () => await tools.getTeams());
+		server.tool("list_teams", "List all Shortcut teams", async () => await tools.listTeams());
 
 		return tools;
 	}
@@ -25,6 +25,19 @@ export class TeamTools extends BaseTools {
 		if (!team) return this.toResult(`Team with public ID: ${teamPublicId} not found.`);
 
 		return this.toResult(`Team: ${team.id}`, await this.entityWithRelatedEntities(team, "team"));
+	}
+
+	async listTeams() {
+		const teams = await this.client.getTeams();
+
+		if (!teams || teams.length === 0) {
+			return this.toResult("No teams found.");
+		}
+
+		return this.toResult(
+			`Found ${teams.length} teams:`,
+			await this.entitiesWithRelatedEntities(teams, "teams"),
+		);
 	}
 
 	async getTeams() {
